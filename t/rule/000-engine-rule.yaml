@@ -1,0 +1,7 @@
+rules:
+- name: rulename
+  when:
+    equals:
+      request.query.param: demo
+  do:
+    proxy: proxy
