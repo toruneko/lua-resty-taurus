@@ -1,0 +1,10 @@
+rules:
+- name: rulename
+  when:
+    has_fields: ["request.query.param"]
+  do:
+    proxy: proxy
+- name: rulename2
+  when:
+  do:
+    proxy: proxy2

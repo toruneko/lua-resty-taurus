@@ -5,3 +5,7 @@ rules:
       request.query.param: demo
   do:
     proxy: proxy
+- name: rulename2
+  when:
+  do:
+    proxy: proxy2
