@@ -17,8 +17,6 @@ addons:
     - valgrind
 
 before_install:
-  - sudo luarocks install luacheck
-  - luacheck -q .
   - sudo cpanm --notest Test::Nginx > build.log 2>&1 || (cat build.log && exit 1)
 
 install:
