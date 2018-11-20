@@ -1,0 +1,15 @@
+rules:
+- name: rulename
+  when:
+    or:
+    - range:
+        request.query.param:
+          gt: 100
+          lte: 200
+    - has_fields: ["request.query.param2"]
+  do:
+    proxy: proxy
+- name: rulename2
+  when:
+  do:
+    proxy: proxy2

@@ -1,0 +1,14 @@
+rules:
+- name: rulename
+  when:
+    not:
+      range:
+        request.query.param:
+          gt: 100
+          lte: 200
+  do:
+    proxy: proxy
+- name: rulename2
+  when:
+  do:
+    proxy: proxy2
