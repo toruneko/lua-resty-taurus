@@ -73,7 +73,7 @@ To load this library,
     local taurus = require "resty.taurus"
 ```
 
-new
+compile
 ---
 `syntax: rule_engine = taurus.compile(r)`
 
