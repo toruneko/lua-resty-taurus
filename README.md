@@ -21,19 +21,40 @@ Synopsis
 ```lua
     # nginx.conf:
 
-    lua_package_path "/path/to/lua-resty-sm3/lib/?.lua;;";
+    lua_package_path "/path/to/lua-resty-taurus/lib/?.lua;;";
 
     server {
         location = /t {
             content_by_lua_block {
-                local resty_sm3 = require "resty.sm3"
-                local sm3 = resty_sm3:new()
-                sm3:update("abc")
-                ngx.say(sm3:final())
+                local r = {
+                    rules = {
+                        {
+                            name = "rulename",
+                            when = {
+                                equals = {
+                                    ["request.query.param"] = "demo"
+                                }
+                            },
+                            ["do"] = {
+                                proxy = "proxy"
+                            }
+                        }
+                    }
+                }
+                local taurus = require "resty.taurus"
+                local rule_engine = taurus.compile(r)
 
-                sm3:reset()
-                sm3:update("abcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcd")
-                ngx.say(sm3:final())
+                local fact = require "resty.taurus.context.fact"
+                local decision = require "resty.taurus.context.decision"
+                local decide = decision.new()
+                local matched = rule_engine:match(fact.new(
+                    ngx.req.get_headers(),
+                    ngx.req.get_uri_args(),
+                    ngx.req.get_post_args(),
+                    {}
+                ), decide)
+                ngx.say(decide.rulename)
+                ngx.say(decide.upstream)
             }
         }
     }
