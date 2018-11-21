@@ -114,7 +114,7 @@ proxy2
 
 
 
-=== TEST 4: not range rule expr not match, no parameter
+=== TEST 4: not range rule expr matched??, no parameter
 --- http_config eval: $::HttpConfig
 --- config
     location = /t {
@@ -135,8 +135,8 @@ proxy2
 --- request
 GET /t
 --- response_body
-rulename2
-proxy2
+rulename
+proxy
 --- error_code: 200
 --- no_error_log
 [warn]
