@@ -61,6 +61,8 @@ Synopsis
     
 ```
 
+Learning more about rule definition: [defining-processors](https://www.elastic.co/guide/en/beats/filebeat/current/defining-processors.html)
+
 Methods
 =======
 
