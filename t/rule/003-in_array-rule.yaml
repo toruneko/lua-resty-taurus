@@ -1,11 +1,11 @@
 rules:
-- name: rulename
-  when:
-    in_array:
-      request.query.param: ["demo1", "demo2"]
-  do:
-    proxy: proxy
-- name: rulename2
-  when:
-  do:
-    proxy: proxy2
+  - name: rulename
+    when:
+      in_array:
+        request.query.param: ["demo1", "demo2"]
+    do:
+      proxy: proxy
+  - name: rulename2
+    when:
+    do:
+      proxy: proxy2
