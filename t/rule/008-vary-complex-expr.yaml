@@ -1,21 +1,21 @@
 rules:
-- name: rulename
-  when:
-    and:
-    - range:
-        request.query.param:
-          gt: 100
-          lte: 200
-    - has_fields: ["request.query.param2"]
-    - or:
-      - contains:
-          request.query.param2: demo
-      - not:
-          in_array:
-            request.query.param2: ["dem1o", "dem2o"]
-  do:
-    proxy: proxy
-- name: rulename2
-  when:
-  do:
-    proxy: proxy2
+  - name: rulename
+    when:
+      and:
+        - range:
+            request.query.param:
+              gt: 100
+              lte: 200
+        - has_fields: ["request.query.param2"]
+        - or:
+            - contains:
+                request.query.param2: demo
+            - not:
+                in_array:
+                  request.query.param2: ["dem1o", "dem2o"]
+    do:
+      proxy: proxy
+  - name: rulename2
+    when:
+    do:
+      proxy: proxy2

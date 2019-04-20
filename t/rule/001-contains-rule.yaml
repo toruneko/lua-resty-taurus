@@ -1,11 +1,11 @@
 rules:
-- name: rulename
-  when:
-    contains:
-      request.query.param: demo
-  do:
-    proxy: proxy
-- name: rulename2
-  when:
-  do:
-    proxy: proxy2
+  - name: rulename
+    when:
+      contains:
+        request.query.param: demo
+    do:
+      proxy: proxy
+  - name: rulename2
+    when:
+    do:
+      proxy: proxy2

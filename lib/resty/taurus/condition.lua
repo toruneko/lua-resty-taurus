@@ -2,6 +2,8 @@
 
 local equals = require "resty.taurus.condition.equals"
 local contains = require "resty.taurus.condition.contains"
+local startwith = require "resty.taurus.condition.startwith"
+local endwith = require "resty.taurus.condition.endwith"
 local range = require "resty.taurus.condition.range"
 local has_fields = require "resty.taurus.condition.has_fields"
 local in_array = require "resty.taurus.condition.in_array"
@@ -26,6 +28,22 @@ function _M.contains(expr)
     end
 
     error("syntax error: no action block for contains condition")
+end
+
+function _M.startwith(expr)
+    for key, value in pairs(expr) do
+        return startwith.new(key, value)
+    end
+
+    error("syntax error: no action block for startwith condition")
+end
+
+function _M.endwith(expr)
+    for key, value in pairs(expr) do
+        return endwith.new(key, value)
+    end
+
+    error("syntax error: no action block for endwith condition")
 end
 
 function _M.range(expr)

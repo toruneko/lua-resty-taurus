@@ -1,11 +1,8 @@
 rules:
   - name: rulename
     when:
-      not:
-        range:
-          request.query.param:
-            gt: 100
-            lte: 200
+      endwith:
+        request.query.param: demo
     do:
       proxy: proxy
   - name: rulename2
