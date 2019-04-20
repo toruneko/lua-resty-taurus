@@ -5,6 +5,7 @@ local ngx_exit = ngx.exit
 local tonumber = tonumber
 local tostring = tostring
 local setmetatable = setmetatable
+local type = type
 
 local _M = { _VERSION = '0.0.1' }
 local mt = { __index = _M }
@@ -21,7 +22,11 @@ function _M.match(self, name)
 end
 
 function _M.proxy(self, action)
-    self.upstream = action
+    if type(action) == "table" then
+        self.upstream = tostring(self.fact:get(action.key))
+    else
+        self.upstream = tostring(action)
+    end
 end
 
 function _M.crc32(self, action)
@@ -31,7 +36,7 @@ function _M.crc32(self, action)
 
     local selector = action.selector
 
-    self.upstream = selector[hash % #selector + 1]
+    self.upstream = tostring(selector[hash % #selector + 1])
 end
 
 function _M.refuse(self, action)
