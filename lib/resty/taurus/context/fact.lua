@@ -56,8 +56,10 @@ end
 
 function _M.get_context(self, method, name)
     local ctx = self.ctx
-    if ctx[method] then
+    if type(ctx[method]) == "table" then
         return ctx[method][name] or ffi_null
+    else
+        return ctx[method]
     end
 
     return ffi_null
