@@ -7,7 +7,7 @@ local error = error
 local ipairs = ipairs
 local setmetatable = setmetatable
 
-local _M = { _VERSION = '0.0.2' }
+local _M = { _VERSION = '0.0.3' }
 local mt = { __index = _M }
 
 local ok, new_tab = pcall(require, "table.new")

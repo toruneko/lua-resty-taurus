@@ -106,6 +106,130 @@ ngx.say(decide.rulename)
 ngx.say(decide.upstream)
 ```
 
+Expression Definition
+======
+
+And
+----
+```yaml
+rules:
+  - name: [rulename]
+    when:
+      and: 
+        - [conditions]
+        - [conditions]
+    do:
+      [action]
+```
+
+Or
+----
+```yaml
+rules:
+  - name: [rulename]
+    when:
+      or: 
+        - [conditions]
+        - [conditions]
+    do:
+      [action]
+```
+
+Not
+----
+```yaml
+rules:
+  - name: [rulename]
+    when:
+      not:
+        [conditions]
+    do:
+      [action]
+```
+
+Rule Definition
+======
+
+```yaml
+rules:
+  - name: [rulename]
+    when:
+      [conditions]
+    do:
+      [action]
+```
+
+Contains
+----
+contains rule defines that the fact value contains expected value.
+```yaml
+contains:
+  request.query.param: demo
+```
+
+Equals
+----
+equals rule defines that the fact value equals to expected value.
+```yaml
+equals:
+  request.query.param: demo
+```
+
+HasFields
+----
+has fields rule defines that the fact includes expected fields.
+```yaml
+has_fields: 
+  - request.query.param
+```
+
+InArray
+----
+in array rule defines that the fact value includes expected values.
+```yaml
+in_array:
+  request.query.param: 
+    - demo1
+    - demo2
+```
+
+StartWith
+----
+start with rule defines that the fact value begins with a expected prefix.
+```yaml
+startwith:
+  request.query.param: demo
+```
+
+EndWith
+----
+end with rule defines that the fact value ends with a expected suffix.
+```yaml
+endwith:
+  request.query.param: demo
+```
+
+Range
+----
+range rule defines that the fact value larger than or less than a expected number.
+```yaml
+range:
+  request.query.param:
+    gt: 100
+    lte: 200
+```
+
+Count
+----
+count rule defines that the fact value counters. In expected window second(s), fact counts over than expected total number, this rule will be matched.
+```yaml
+count:
+  request.query.param: 
+    dict_name: count
+    total: 1
+    window: 1
+```
+
 Author
 ======
 
