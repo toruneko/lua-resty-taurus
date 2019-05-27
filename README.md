@@ -161,7 +161,7 @@ rules:
 
 Contains
 ----
-contains rule defines that the fact value contains expected value.
+contains rule defines that the fact value contains a expected value.
 ```yaml
 contains:
   request.query.param: demo
@@ -169,7 +169,7 @@ contains:
 
 Equals
 ----
-equals rule defines that the fact value equals to expected value.
+equals rule defines that the fact value equals to a expected value.
 ```yaml
 equals:
   request.query.param: demo
@@ -185,7 +185,7 @@ has_fields:
 
 InArray
 ----
-in array rule defines that the fact value includes expected values.
+in array rule defines that the fact value includes some expected values.
 ```yaml
 in_array:
   request.query.param: 
