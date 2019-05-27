@@ -1,0 +1,14 @@
+rules:
+  - name: rulename
+    when:
+      count:
+        request.query.param:
+          dict_name: counter
+          total: 1
+          window: 1
+    do:
+      proxy: proxy
+  - name: rulename2
+    when:
+    do:
+      proxy: proxy2

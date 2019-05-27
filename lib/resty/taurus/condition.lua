@@ -7,6 +7,7 @@ local endwith = require "resty.taurus.condition.endwith"
 local range = require "resty.taurus.condition.range"
 local has_fields = require "resty.taurus.condition.has_fields"
 local in_array = require "resty.taurus.condition.in_array"
+local count = require "resty.taurus.condition.count"
 
 local type = type
 local error = error
@@ -72,6 +73,18 @@ function _M.has_fields(expr)
     end
 
     error("syntax error: bad action block for has_fields condition")
+end
+
+function _M.count(expr)
+    for key, value in pairs(expr) do
+        if type(value) == "table" then
+            return count.new(key, value)
+        end
+
+        error("syntax error: bad action block for count condition")
+    end
+
+    error("syntax error: bad action block for count condition")
 end
 
 function _M.default(expr)
