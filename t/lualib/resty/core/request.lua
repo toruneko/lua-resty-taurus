@@ -72,11 +72,17 @@ local req_headers_mt = {
     end
 }
 
-
 function ngx.req.get_headers(max_headers, raw)
     local r = getfenv(0).__ngx_req
     if not r then
-        error("no request found")
+        local ok, exdata = pcall(require, "thread.exdata")
+        if not ok then
+            error("no request found")
+        end
+        r = exdata()
+        if not r then
+            error("no request found")
+        end
     end
 
     if not max_headers then
@@ -145,7 +151,14 @@ end
 function ngx.req.get_uri_args(max_args)
     local r = getfenv(0).__ngx_req
     if not r then
-        error("no request found")
+        local ok, exdata = pcall(require, "thread.exdata")
+        if not ok then
+            error("no request found")
+        end
+        r = exdata()
+        if not r then
+            error("no request found")
+        end
     end
 
     if not max_args then
