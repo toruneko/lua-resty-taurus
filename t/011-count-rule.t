@@ -12,11 +12,11 @@ no_long_string();
 
 our $HttpConfig = <<'_EOC_';
     lua_need_request_body on;
+    lua_load_resty_core on;
     lua_package_path "$TEST_NGINX_CWD/lib/?.lua;$TEST_NGINX_CWD/t/lualib/?.lua;";
     lua_shared_dict counter    1m;
 
     init_by_lua_block {
-        require "resty.core"
         local yaml = require "resty.yaml"
         local taurus = require "resty.taurus"
         local text = io.open("$TEST_NGINX_CWD/t/rule/011-count-rule.yaml"):read("*a")

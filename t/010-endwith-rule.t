@@ -12,6 +12,7 @@ no_long_string();
 
 our $HttpConfig = <<'_EOC_';
     lua_need_request_body on;
+    lua_load_resty_core off;
     lua_package_path "$TEST_NGINX_CWD/lib/?.lua;$TEST_NGINX_CWD/t/lualib/?.lua;";
 
     init_by_lua_block {
