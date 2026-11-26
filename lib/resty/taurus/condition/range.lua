@@ -21,18 +21,37 @@ function _M.execute(self, fact)
         return false
     end
     search = tonumber(search)
+    if not search then
+        return false
+    end
 
-    if value["gt"] and not (search > tonumber(value["gt"])) then
-        return false
+    local gt = value["gt"]
+    if gt ~= nil then
+        gt = tonumber(gt)
+        if not gt or not (search > gt) then
+            return false
+        end
     end
-    if value["gte"] and not (search >= tonumber(value["gte"])) then
-        return false
+    local gte = value["gte"]
+    if gte ~= nil then
+        gte = tonumber(gte)
+        if not gte or not (search >= gte) then
+            return false
+        end
     end
-    if value["lt"] and not (search < tonumber(value["lt"])) then
-        return false
+    local lt = value["lt"]
+    if lt ~= nil then
+        lt = tonumber(lt)
+        if not lt or not (search < lt) then
+            return false
+        end
     end
-    if value["lte"] and not (search <= tonumber(value["lte"])) then
-        return false
+    local lte = value["lte"]
+    if lte ~= nil then
+        lte = tonumber(lte)
+        if not lte or not (search <= lte) then
+            return false
+        end
     end
 
     return true

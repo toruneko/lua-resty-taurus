@@ -3,7 +3,6 @@
 local tostring = tostring
 local setmetatable = setmetatable
 
-local str_len = string.len
 local re_find = ngx.re.find
 
 local _M = { _VERSION = '0.0.1' }
@@ -24,8 +23,10 @@ function _M.execute(self, fact)
         return false
     end
 
-    local from, to, err = re_find(tostring(search), tostring(value), "jo")
-    if to == str_len(search) then
+    -- 必须以模式匹配到字符串末尾才算 ends with，
+    -- 直接取首个匹配的 to 位置会在后缀在字符串中更早出现时误判
+    local from, to, err = re_find(tostring(search), "(?:" .. tostring(value) .. ")$", "jo")
+    if from then
         return true
     else
         return false

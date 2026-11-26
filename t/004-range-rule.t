@@ -141,3 +141,32 @@ proxy2
 --- error_code: 200
 --- no_error_log
 [warn]
+
+
+
+=== TEST 5: range rule not match, non-numeric parameter
+--- http_config eval: $::HttpConfig
+--- config
+    location = /t {
+        content_by_lua_block {
+            local fact = require "resty.taurus.context.fact"
+            local decision = require "resty.taurus.context.decision"
+            local decide = decision.new()
+            _G.rule_engine:match(fact.new(
+                ngx.req.get_headers(),
+                ngx.req.get_uri_args(),
+                ngx.req.get_post_args(),
+                {}
+            ), decide)
+            ngx.say(decide.rulename or "")
+            ngx.say(decide.upstream or "")
+        }
+    }
+--- request
+GET /t?param=abc
+--- response_body
+rulename2
+proxy2
+--- error_code: 200
+--- no_error_log
+[warn]
