@@ -25,6 +25,9 @@ function _M.execute(self, fact)
 
     if type(values) ~= "table" then
         values = fact:get(tostring(values))
+        if type(values) ~= "table" then
+            return false
+        end
     end
 
     for _, value in ipairs(values) do
